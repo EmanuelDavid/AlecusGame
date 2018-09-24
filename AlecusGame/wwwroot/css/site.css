@@ -35,3 +35,26 @@ body {
         display: none;
     }
 }
+
+.myTable {
+    text-align: center;
+    width: 50%;
+    height: 500px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top:15%;
+}
+
+td {
+    width: 25%;
+    height: 25%;
+    border: 1px solid black;
+    font-size: 90px;
+}
+
+.myTable tr:first-child td:nth-child(1),
+.myTable tr:first-child td:nth-child(4),
+.myTable tr:last-child td:nth-child(1),
+.myTable tr:last-child td:nth-child(4) {
+    border: 1px transparent;
+}

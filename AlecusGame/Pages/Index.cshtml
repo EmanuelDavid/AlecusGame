@@ -4,49 +4,77 @@
     ViewData["Title"] = "Home page";
 }
 
+<div class="rulesOfTheGameDiv">The rule of the game is to have numbers that are not consecutive as neighbors! </div>
+
 <table id="containerTable" name="containerTable" class="myTable">
     <tr id="row1" name="row1">
-        <td id="cell1" name="cell1" onclick='tdClick(event );'>transfer</td>
-        <td id="cell2" name="cell2" onclick='tdClick(event );'></td>
-        <td id="cell3" name="cell3" onclick='tdClick();'></td>
-        <td id="cell4" name="cell4" onclick='tdClick();'></td>
+        <td id="cell1" name="cell1"></td>
+        <td id="cell2" name="cell2"><input type="text" onkeyup="tdClick()"></td>
+        <td id="cell3" name="cell3"><input type="text" onkeyup="tdClick()"></td>
+        <td id="cell4" name="cell4"><input type="text" onkeyup="tdClick()"></td>
     </tr>
     <tr id="row2" name="row2">
-        <td id="cell5" name="cell5" onclick='tdClick();'></td>
-        <td id="cell6" name="cell6" onclick='tdClick();'></td>
-        <td id="cell7" name="cell7" onclick='tdClick();'></td>
-        <td id="cell8" name="cell8" onclick='tdClick();'></td>
+        <td id="cell5" name="cell5"><input type="text" onkeyup="tdClick()"></td>
+        <td id="cell6" name="cell6"><input type="text" onkeyup="tdClick()"></td>
+        <td id="cell7" name="cell7"><input type="text" onkeyup="tdClick()"></td>
+        <td id="cell8" name="cell8"><input type="text" onkeyup="tdClick()"></td>
     </tr>
     <tr id="row3" name="row3">
-        <td id="cell9" name="cell9" onclick='tdClick();'></td>
-        <td id="cell10" name="cell10" onclick='tdClick();'></td>
-        <td id="cell11" name="cell11" onclick='tdClick();'></td>
-        <td id="cell12" name="cell12" onclick='tdClick();'></td>
-    </tr>
-    <tr id="row4" name="row4">
-        <td id="cell13" name="cell13" onclick='tdClick();'></td>
-        <td id="cell14" name="cell14" onclick='tdClick();'></td>
-        <td id="cell15" name="cell15" onclick='tdClick();'></td>
-        <td id="cell16" name="cell16" onclick='tdClick();'></td>
+        <td ><input type="text" onkeyup="tdClick()"></td>
+        <td ><input type="text" onkeyup="tdClick()"></td>
+        <td ><input type="text" onkeyup="tdClick()"></td>
+        <td ><input type="text" onkeyup="tdClick()"></td>
     </tr>
 </table>
 
+<div id="winnerDiv" class="winnerDiv"></div>
 
 @section Scripts {
     <script>
-        function tdClick(event) {
-            //call api api tells what to dysplay
-            var result = "";
+        function tdClick() {
+
+            var alecuMoves = [];
+
+            $(":input").each(function (index, input) {
+                alecuMoves.push(+input.value);
+            });
+
+            var data = JSON.stringify({ AlecuMoves: alecuMoves });
+            var isCorrect = false;
             $.ajax({
-                type:'GET',
-                url: "https://localhost:44315/Chess/Index",
+                contentType:'application/json',
+                data: data,
+                dataType: 'json',
+                type: 'POST',
+                url: "https://localhost:44315/Alecu/CheckIfCorrect",
                 async: false,
                 success: function (data) {
-                    result = data;
+                    isCorrect = data;
                 }
             });
 
-            $(event.target).text('Test message here');
+            if (isCorrect) {
+
+                var contor = 0;
+                var isWinner = 0;
+
+                alecuMoves.forEach(function (value) {
+                    if (parseInt(value, 10) !== parseInt(0, 10)) {
+                        isWinner++;
+                    } else {
+                        contor++;
+                    }
+                    if (contor === 4 && isWinner === 8) {
+                        debugger;
+
+                        $("#winnerDiv").text('UUooa! We have a winner!');
+                    }
+                });
+
+            } else {
+                alert("The inputed char is not correct, please change the number or the neighbors!");
+            }
+
         }
     </script>
 }

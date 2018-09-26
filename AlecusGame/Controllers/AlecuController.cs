@@ -19,6 +19,7 @@ namespace AlecusGame.Controllers
             {
                 return false;
             }
+
             var cellValues = model.AlecuMoves;
             _matrix = new int[,]
             {
@@ -40,7 +41,7 @@ namespace AlecusGame.Controllers
 
                     var currentCellValue = _matrix[row, col];
 
-                    if (currentCellValue > 8)
+                    if ((0 > currentCellValue) || (currentCellValue > 8))
                     {
                         return false;
                     }

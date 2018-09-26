@@ -46,7 +46,7 @@
                 data: data,
                 dataType: 'json',
                 type: 'POST',
-                url: "https://localhost:44315/Alecu/CheckIfCorrect",
+                url: "@Url.Action("CheckIfCorrect", "Alecu")",
                 async: false,
                 success: function (data) {
                     isCorrect = data;
@@ -65,8 +65,6 @@
                         contor++;
                     }
                     if (contor === 4 && isWinner === 8) {
-                        debugger;
-
                         $("#winnerDiv").text('UUooa! We have a winner!');
                     }
                 });

@@ -13,6 +13,7 @@ export default class App extends Component {
                 </header>
 
                 <AlecuGrid />
+                <div id="winnerDiv" className="winnerDiv"></div>
             </div>
     );
     }

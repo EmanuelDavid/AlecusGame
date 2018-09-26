@@ -4,7 +4,15 @@ export default class AlecuGrid extends Component {
 
     tdClick = async () => {
 
-        var model = JSON.stringify({ AlecuMoves: "{1}" });
+        var alecuMoves = [];
+
+        var inputs = document.getElementsByTagName('input');
+
+        for (var i = 0; i < inputs.length; i++) {
+            alecuMoves.push(+inputs[i].value);
+        }
+
+        var model = JSON.stringify({ AlecuMoves: alecuMoves });
 
         const settings = {
             method: 'POST',
@@ -14,7 +22,7 @@ export default class AlecuGrid extends Component {
             },
             body: model
         };
-
+        
         const api_call = await fetch("https://localhost:44315/Alecu/CheckIfCorrect", settings)
             .then(response => response.json())
             .then(json => {
@@ -23,9 +31,28 @@ export default class AlecuGrid extends Component {
             .catch(e => {
                 return e;
             });
-        console.log(api_call);
+
+        if (api_call) {
+
+            var contor = 0;
+            var isWinner = 0;
+
+            alecuMoves.forEach(function (value) {
+                if (parseInt(value, 10) !== parseInt(0, 10)) {
+                    isWinner++;
+                } else {
+                    contor++;
+                }
+                if (contor === 4 && isWinner === 8) {
+                    document.getElementById("winnerDiv").innerHTML = "UUooa! We have a winner!";
+                }
+            });
+
+        } else {
+            alert("The inputed char is not correct, please change the number or the neighbors!");
+        }
     };
-    //event.preventDefault();
+
 
     render() {
         return (
@@ -33,7 +60,7 @@ export default class AlecuGrid extends Component {
             <table id="containerTable" name="containerTable" className="myTable">
                 <tbody>
                     <tr id="row1" name="row1">
-                        <td />
+                        <td><input type="text" onKeyUp={this.tdClick} /></td>
                         <td id="cell2" name="cell2" className="td"><input type="text" onKeyUp={this.tdClick} /></td>
                         <td id="cell3" name="cell3"><input type="text" onKeyUp={this.tdClick} /></td>
                         <td id="cell4" name="cell4"><input type="text" onKeyUp={this.tdClick} /></td>

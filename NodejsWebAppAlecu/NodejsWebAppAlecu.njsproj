@@ -146,7 +146,6 @@
     <TypeScriptCompile Include="alecusgame-react\node_modules\whatwg-encoding\node_modules\iconv-lite\lib\index.d.ts" />
     <TypeScriptCompile Include="alecusgame-react\node_modules\worker-farm\index.d.ts" />
     <TypeScriptCompile Include="server.ts" />
-    <Content Include="alecusgame-react\.gitignore" />
     <Content Include="alecusgame-react\build\asset-manifest.json" />
     <Content Include="alecusgame-react\build\favicon.ico" />
     <Content Include="alecusgame-react\build\index.html" />
@@ -10038,6 +10037,7 @@
     <Folder Include="alecusgame-react\node_modules\yargs\node_modules\string-width\" />
     <Folder Include="alecusgame-react\public\" />
     <Folder Include="alecusgame-react\src\" />
+    <Folder Include="alecusgame-react\src\Components\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="alecusgame-react\build\service-worker.js" />
@@ -22899,6 +22899,7 @@
     <Compile Include="alecusgame-react\node_modules\yargs\node_modules\is-fullwidth-code-point\index.js" />
     <Compile Include="alecusgame-react\node_modules\yargs\node_modules\string-width\index.js" />
     <Compile Include="alecusgame-react\node_modules\yargs\yargs.js" />
+    <Compile Include="alecusgame-react\src\Components\AlecuGrid.js" />
     <Compile Include="alecusgame-react\src\App.js" />
     <Compile Include="alecusgame-react\src\App.test.js" />
     <Compile Include="alecusgame-react\src\index.js" />
